@@ -1,16 +1,22 @@
 'use strict'
 
-//const axios = require('axios');
-
-//var pokerSolver = require('/pokerSolver/js/pokerSolver.js');
-
 module.exports.solvePoker = function solvePoker(req, res, next) {
   console.log("==================");
-  console.log(req.ArrayRondas.value); //JSON!derulo
+
   var data = req.ArrayRondas.value;
 
   let pokerSolver = require('../js/pokerSolver.js');
   var sol = pokerSolver.readPoker(data);
+
+  for(var i in data){
+    console.log("Mano %s", i);
+    console.log("   Jugadas: ");
+    for(var jugada in data[i].jugadas){
+      console.log(data[i].jugadas[jugada]);
+    }
+    console.log("   Bote: " + data[i].bote);
+  }
+  console.log("==========SOLUCION==========");
   console.log(sol);
 
   res.send(sol);

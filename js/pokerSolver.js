@@ -149,7 +149,7 @@ function desempate(gana, premio){
     if(nuevoGana.length <=0){
         res = "ERROR; NO HAY GANADOR";
     }else if (nuevoGana.length == 1){
-        res = gana[0][0] + " gana " + premio + " euros.";
+        res = nuevoGana[0][0] + " gana " + premio + " euros.";
     }else{
         res = "Verdadero empate.";
     }
