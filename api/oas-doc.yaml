@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  description: >-
+    Solucionador de partidas de póker realizado por Carlos Núñez Arenas para
+    ISADevDay 2021.
+  version: 1.0.0
+  title: Poker Solver
+  contact:
+    email: carnuare@gmail.com
+tags:
+  - name: hand
+    description: Escoge el ganador
+paths:
+  /api/v1/hand:
+    post:
+      description: >-
+        La entrada será un array con varias rondas. Cada ronda contiene un
+        conjunto de jugadas a comparar (con un nombre de jugador, una apuesta, y
+        cinco cartas -una mano- por jugada), y un bote acumulado por los empates
+        anteriores, que ganará el jugador que mejor mano tenga.
+      operationId: solvePoker
+      responses:
+        '200':
+          description: Resultados
+          content:
+            plain/text:
+              schema:
+                type: string
+        '201':
+          description: error
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorModel'
+      requestBody:
+        x-name: ArrayRondas
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArrayRondas'
+components:
+  schemas:
+    errorModel:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    ArrayRondas:
+      type: array
+      description: Array con un varias rondas
+      items:
+        $ref: '#/components/schemas/Ronda'
+    Ronda:
+      type: object
+      properties:
+        jugadas:
+          minItems: 2
+          type: array
+          items:
+            type: object
+            properties:
+              jugador:
+                type: string
+              apuesta:
+                type: integer
+                format: int32
+              cartas:
+                type: array
+                minItems: 5
+                maxItems: 5
+                items:
+                  type: object
+                  properties:
+                    valor:
+                      type: string
+                    palo:
+                      type: string
+        bote:
+          type: integer
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
