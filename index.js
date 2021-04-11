@@ -5,6 +5,7 @@ var fs = require('fs'),
     path = require('path');
 
 var express = require("express");
+let pokerSolver = require('./js/pokerSolver.js');
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({
@@ -12,6 +13,7 @@ app.use(bodyParser.json({
 }));
 var oasTools = require('oas-tools');
 var jsyaml = require('js-yaml');
+const { response } = require('express');
 var serverPort = process.env.PORT || 8080;
 
 var spec = fs.readFileSync(path.join(__dirname, '/api/oas-doc.yaml'), 'utf8');
@@ -43,4 +45,11 @@ app.get('/info', function(req, res) {
     info: "This API was generated using oas-generator!",
     name: oasDoc.info.title
   });
+});
+
+app.post('/api/v1/handTelegram', function(req,res){
+  var respuesta = pokerSolver.readPokerTelegram(req.body);
+  console.log(req.body);
+  console.log(respuesta);
+  res.json(respuesta);
 });

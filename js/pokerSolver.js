@@ -24,6 +24,34 @@ module.exports.readPoker = function readPoker(data){
     }
     return res;
 }
+module.exports.readPokerTelegram = function readPokerTelegram(data){ //entrada es un objeto con "nombreJugador": "sumano", ...
+    var sol = {};
+    for(jugador in data){
+        var mano = data[jugador].replace(/\s/g, ''); //quita los espacios de la lista de cartas para parsearlas bien
+        mano = parseCartasTelegram(mano); //de un string '3H,4C...' lo paso a -> [{"valor": "3", palo:"H"}, {"valor": "4", palo:"c"}, ... ]
+        sol[jugador] = calcularPuntuacion(mano);
+    }
+    var res = determinarGanador(sol, 0);
+    var respuesta = "";
+    if(res == "Verdadero empate." || res == "Partida amañada."){
+        respuesta = res;
+    }else{
+        respuesta = res.split(' ')[0] + " gana la partida.";
+    }
+    return respuesta;
+}
+
+function parseCartasTelegram(mano){
+    var res = [];
+    var cartas = mano.split(','); //divido por coma
+    for(var i= 0; i< cartas.length; i++){
+        var cartaDefault = {"valor": "", "palo": ""};
+        cartaDefault["valor"] = cartas[i][0]; //primer caracter del string es valor 
+        cartaDefault["palo"] = cartas[i][1]; //segundo caracter del string es palo 
+        res.push(cartaDefault);
+    }
+    return res;
+}
 
 function resolverRonda(rondaN){ //rondaN es una sola ronda con varias manos con sus respectivas cartas + apuestas, y un bote
     var sol = {};
