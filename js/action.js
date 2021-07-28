@@ -5,6 +5,8 @@ const numOfRepeats = parseInt(core.getInput('num_of_repeats'));
  
 let outputText = ""
 let i;
+console.log('Texto: ${inputText}' )
+console.log('Nº veces a repetir: $ {numOfRepeats}')
 for (i = 0; i < numOfRepeats; i++) {
     outputText += inputText;
 }

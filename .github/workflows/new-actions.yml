@@ -19,5 +19,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm install @actions/core
-      - run: node ./js/action.js
-      - run: echo ${{ needs.run-js.outputs.output_text }}
+      - name: Action script
+        id: js
+        run: node ./js/action.js
+      - run: echo ${{ steps.js.outputs.output_text }}
