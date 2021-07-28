@@ -20,4 +20,4 @@ jobs:
           node-version: '14'
       - run: npm install @actions/core
       - run: node ./js/action.js
-      - run: echo ${{ outputs.output_text }}
+      - run: echo ${{ needs.run-js.outputs.output_text }}
