@@ -1,4 +1,4 @@
-name: new-manual-actions
+name: js-action
 on:
   workflow_dispatch:
       inputs:
@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm install @actions/core
+      - run: npm install @actions/github
       - name: Action script
         id: js
         run: node ./js/action.js

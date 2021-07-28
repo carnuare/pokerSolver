@@ -1,4 +1,5 @@
-const core = require('@actions/core')
+const core = require('@actions/core');
+const github = require('@actions/github');
  
 const inputText = core.getInput('input_text');
 const numOfRepeats = parseInt(core.getInput('num_of_repeats'));
