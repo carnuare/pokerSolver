@@ -17,5 +17,4 @@ jobs:
 
       - uses: ./.github/actions/js-repeat.yml
  
-			- name: Print JavaScript output
-				run: echo ${{ steps.js-action.outputs.output_text }}
+			- run: echo ${{ steps.js-action.outputs.output_text }}
