@@ -1,0 +1,19 @@
+name: new-manual-actions
+on:
+  workflow_dispatch:
+      inputs:
+        input_text:
+          required: true
+          default: 'Ejemplo'
+        num_of_repeats:
+          required: false
+          default: '1'
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: node ./js/action.js
