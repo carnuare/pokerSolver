@@ -18,6 +18,9 @@ jobs:
       - name: JavaScript repeat action
 				uses: ./.github/actions/js-repeat.yml
 				id: js-action
+        with:
+					input_text: "texto de prueba"
+					num_of_repeats: "4"
  
 			- name: Print JavaScript output
 				run: echo ${{ steps.js-action.outputs.output_text }}
