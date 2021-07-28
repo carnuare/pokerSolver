@@ -14,9 +14,12 @@ jobs:
     outputs:
       output-text:
     steps:
+      - name: js repeat 
+        id: js-action
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
       - run: npm install @actions/core
       - run: node ./js/action.js
+      - run: echo ${{ steps.js-action.outputs.output_text }}
