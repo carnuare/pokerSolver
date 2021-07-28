@@ -15,8 +15,9 @@ outputs:
 	output_text:
 		description: 'El texto repetido el número de veces indicado'
  
-# Aquí van los valores específicos para configurar Docker 
-# o JavaScript, se explicarán más adelante.
+runs:
+  using: 'node12'
+  main: './js/action.js'
  
 branding:
 	icon: 'rotate-cw'

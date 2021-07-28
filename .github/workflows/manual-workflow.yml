@@ -2,16 +2,22 @@ name: Manually triggered workflow
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: 'Name'
+      input_text:
         required: true
-        default: 'Mona the Octocat'
-      status:
-        description: 'Status'
+        default: 'Ejemplo'
+      num_of_repeats:
         required: false
+        default: '1'
 
 jobs:
-  say_hello:
+  sample_action:
     runs-on: ubuntu-latest
     steps:
-      - run: ./.github/actions/hello-world-action
+      - uses: actions/checkout@v2
+
+      - name: JavaScript repeat action
+				uses: ./.github/actions/js-repeat
+				id: js-action
+ 
+			- name: Print JavaScript output
+				run: echo ${{ steps.js-action.outputs.output_text }}
