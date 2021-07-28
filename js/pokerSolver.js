@@ -17,7 +17,7 @@ const puntuacionCarta = {
 //para llamarlo desde otro script
 module.exports.readPoker = function readPoker(data){
     var res = [];
-    for(numeroMano in data){
+    for(numeroMano in data){ 
         var n = parseInt(numeroMano);
         //console.log('mano %d:', n+1);
         res.push(resolverRonda(data[numeroMano]));
@@ -405,7 +405,7 @@ function parseCartas(cartas){
 
 // FUNCIONES DE CADA TIPO DE MANO
 
-function checkEscaleraColor(cartasParseadas){ //consideramos que una escalera no puede ser A2345 
+function checkEscaleraColor(cartasParseadas){ 
     var res = false; //valor retornado por la funcion, false hata que se demuestre lo contrario
 
     if(checkEscalera(cartasParseadas) || checkEscaleraEspecial(cartasParseadas)){ //condicion1: que sea escalera
