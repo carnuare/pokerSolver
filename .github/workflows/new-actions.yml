@@ -1,6 +1,6 @@
 name: new-manual-actions
 on:
-  workflow_dispatch:
+  run-js:
       inputs:
         input_text:
           required: true
